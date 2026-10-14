@@ -81,5 +81,6 @@ public class Proceso {
     public int getRespuesta() {
         return primeraEjecucion - llegada;
     }
+
 }
 
