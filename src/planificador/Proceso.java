@@ -1,16 +1,16 @@
-
 package planificador;
 
 public class Proceso {
-
     private String nombre;
     private int llegada;
     private int rafaga;
     private int tiempoRestante;
     private EstadoProceso estado;
 
-    private int instanteFin;
-    private int primeraEjecucion;
+    // Atributos para métricas
+    private int fin = 0;
+    private int tiempoEjecutadoPorPrimeraVez = -1;
+    private int quantumRestante = 0;
 
     public Proceso(String nombre, int llegada, int rafaga) {
         this.nombre = nombre;
@@ -18,60 +18,31 @@ public class Proceso {
         this.rafaga = rafaga;
         this.tiempoRestante = rafaga;
         this.estado = EstadoProceso.NUEVO;
-        this.instanteFin = -1;
-        this.primeraEjecucion = -1;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    // Getters y Setters
+    public String getNombre() { return nombre; }
+    public int getLlegada() { return llegada; }
+    public int getRafaga() { return rafaga; }
 
-    public int getLlegada() {
-        return llegada;
-    }
+    public int getTiempoRestante() { return tiempoRestante; }
+    public void setTiempoRestante(int tiempoRestante) { this.tiempoRestante = tiempoRestante; }
 
-    public int getRafaga() {
-        return rafaga;
-    }
+    public EstadoProceso getEstado() { return estado; }
+    public void setEstado(EstadoProceso estado) { this.estado = estado; }
 
-    public int getTiempoRestante() {
-        return tiempoRestante;
-    }
+    public int getFin() { return fin; }
+    public void setFin(int fin) { this.fin = fin; }
 
-    public EstadoProceso getEstado() {
-        return estado;
-    }
+    public int getTiempoEjecutadoPorPrimeraVez() { return tiempoEjecutadoPorPrimeraVez; }
+    public void setTiempoEjecutadoPorPrimeraVez(int t) { this.tiempoEjecutadoPorPrimeraVez = t; }
 
-    public int getInstanteFin() {
-        return instanteFin;
-    }
+    public int getQuantumRestante() { return quantumRestante; }
+    public void setQuantumRestante(int q) { this.quantumRestante = q; }
 
-    public int getPrimeraEjecucion() {
-        return primeraEjecucion;
-    }
-
-    public void setTiempoRestante(int tiempoRestante) {
-        this.tiempoRestante = tiempoRestante;
-    }
-
-    public void setEstado(EstadoProceso estado) {
-        this.estado = estado;
-    }
-
-    public void setInstanteFin(int instanteFin) {
-        this.instanteFin = instanteFin;
-    }
-
-    public void setPrimeraEjecucion(int primeraEjecucion) {
-        this.primeraEjecucion = primeraEjecucion;
-    }
-
-    public Proceso copia() {
-        return new Proceso(nombre, llegada, rafaga);
-    }
-
+    // Fórmulas de métricas del enunciado
     public int getRetorno() {
-        return instanteFin - llegada;
+        return fin - llegada;
     }
 
     public int getEspera() {
@@ -79,8 +50,6 @@ public class Proceso {
     }
 
     public int getRespuesta() {
-        return primeraEjecucion - llegada;
+        return tiempoEjecutadoPorPrimeraVez - llegada;
     }
-
 }
-
